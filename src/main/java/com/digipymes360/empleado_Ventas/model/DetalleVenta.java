@@ -6,8 +6,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import lombok.Data;
+
 @Entity
 @Data
+
 // @Table(name = "detalle_venta")
 public class DetalleVenta {
     @Id
