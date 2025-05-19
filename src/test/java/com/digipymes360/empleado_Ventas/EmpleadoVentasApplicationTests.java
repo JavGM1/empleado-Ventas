@@ -1,0 +1,13 @@
+package com.digipymes360.empleado_Ventas;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class EmpleadoVentasApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
