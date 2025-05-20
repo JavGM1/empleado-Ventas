@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
+// @Table(name = "factura")
 public class Factura {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "factura_seq")
