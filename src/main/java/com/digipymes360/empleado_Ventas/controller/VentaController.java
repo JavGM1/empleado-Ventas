@@ -3,7 +3,8 @@ package com.digipymes360.empleado_Ventas.controller;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.digipymes360.empleado_Ventas.model.DetalleVenta;
 import com.digipymes360.empleado_Ventas.model.Venta;
@@ -13,7 +14,8 @@ import com.digipymes360.empleado_Ventas.repository.VentaRepository;
 
 import lombok.RequiredArgsConstructor;
 
-@Service
+@RestController
+@RequestMapping("/ventas")
 @RequiredArgsConstructor
 
 public class VentaController {
