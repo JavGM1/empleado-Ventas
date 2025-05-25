@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 import com.digipymes360.empleado_Ventas.model.Devolucion;
 import com.digipymes360.empleado_Ventas.repository.DevolucionRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 
 public class DevolucionService {
 

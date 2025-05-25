@@ -4,12 +4,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import lombok.Data;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Data
+
 // @Table(name = "factura")
 public class Factura {
     @Id
@@ -17,7 +22,11 @@ public class Factura {
     @SequenceGenerator(name = "factura_seq", sequenceName = "FACTURA_SEQ", allocationSize = 1)
     private Long idFactura;
 
-    private Long idVenta;
     private LocalDateTime fechaEmision;
-    private String archivoPdf;
+
+@OneToOne
+@JoinColumn(name = "idVenta", nullable = false, unique = true)
+@JsonBackReference
+
+private Venta venta;
 }

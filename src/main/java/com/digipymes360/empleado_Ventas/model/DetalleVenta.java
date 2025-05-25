@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import lombok.Data;
 
@@ -18,8 +20,10 @@ public class DetalleVenta {
 
     private Long idDetalle;
 
-    private Long idVenta;
     private Long idProducto;
     private Integer cantidad;
-    private Double subtotal;
+
+    @ManyToOne
+    @JoinColumn(name = "idVenta")
+    private Venta venta;
 }

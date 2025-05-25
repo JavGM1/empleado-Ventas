@@ -3,36 +3,49 @@ package com.digipymes360.empleado_Ventas.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.digipymes360.empleado_Ventas.model.DetalleVenta;
+import com.digipymes360.empleado_Ventas.model.Factura;
 import com.digipymes360.empleado_Ventas.model.Venta;
 import com.digipymes360.empleado_Ventas.repository.DetalleVentaRepository;
 import com.digipymes360.empleado_Ventas.repository.ProductoRepository;
 import com.digipymes360.empleado_Ventas.repository.VentaRepository;
+import com.digipymes360.empleado_Ventas.repository.FacturaRepository;
 
-import lombok.RequiredArgsConstructor;
+
 
 @Service
-@RequiredArgsConstructor
 @Transactional
 
 public class VentaService {
-    private final VentaRepository ventaRepository;
-    private final DetalleVentaRepository detalleVentaRepository;
-    private final ProductoRepository productoRepository;
+    
+    @Autowired
+    private VentaRepository ventaRepository;
+    @Autowired
+    private DetalleVentaRepository detalleVentaRepository;
+    @Autowired
+    private ProductoRepository productoRepository;
+    @Autowired
+    private FacturaRepository facturaRepository;
 
     public Venta registrarVenta(Venta venta, List<DetalleVenta> detalles) {
         Venta v = ventaRepository.save(venta);
         for (DetalleVenta d : detalles) {
-            d.setIdVenta(v.getIdVenta());
+            d.setVenta(v);
             detalleVentaRepository.save(d);
             productoRepository.findById(d.getIdProducto()).ifPresent(p -> {
-                p.setStock(p.getStock() - d.getCantidad());
-                productoRepository.save(p);
-            });
+            p.setStock(p.getStock() - d.getCantidad());
+            productoRepository.save(p);
+        });
         }
+        Factura factura = new Factura();
+        factura.setVenta(v);
+        facturaRepository.save(factura);
+        // Asociar la factura a la venta
+        v.setFactura(factura);
         return v;
     }
 
