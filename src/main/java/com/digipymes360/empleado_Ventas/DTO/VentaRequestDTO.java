@@ -1,4 +1,4 @@
-package com.digipymes360.empleado_Ventas.dto;
+package com.digipymes360.empleado_Ventas.DTO;
 
 import lombok.Data;
 import java.util.List;

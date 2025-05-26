@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.digipymes360.empleado_Ventas.dto.VentaRequestDTO;
+import com.digipymes360.empleado_Ventas.DTO.VentaRequestDTO;
 import com.digipymes360.empleado_Ventas.model.DetalleVenta;
 import com.digipymes360.empleado_Ventas.model.Venta;
 import com.digipymes360.empleado_Ventas.service.VentaService;

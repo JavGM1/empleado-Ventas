@@ -38,7 +38,8 @@ public class Venta {
     @JsonManagedReference
     private Factura factura;
 
-    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<DetalleVenta> detalles;
 
 }
