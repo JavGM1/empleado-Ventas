@@ -47,6 +47,7 @@ public class VentaService {
         factura.setFechaEmision(LocalDateTime.now()); 
         facturaRepository.save(factura);
         v.setFactura(factura);
+        v.setDetalles(detalles);
         return v;
     }
 

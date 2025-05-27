@@ -1,12 +1,14 @@
 package com.digipymes360.empleado_Ventas.controller;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.digipymes360.empleado_Ventas.DTO.DetalleVentaDTO;
 import com.digipymes360.empleado_Ventas.DTO.VentaRequestDTO;
 import com.digipymes360.empleado_Ventas.model.DetalleVenta;
 import com.digipymes360.empleado_Ventas.model.Venta;
@@ -33,16 +35,18 @@ private final VentaService ventaService;
         venta.setEstado(ventaRequest.getEstado());
         venta.setFechaVenta(LocalDateTime.now());
 
-        List<DetalleVenta> detalles = ventaRequest.getDetalles().stream().map(dto -> {
-            DetalleVenta d = new DetalleVenta();
-            d.setIdProducto(dto.getIdProducto());
-            d.setCantidad(dto.getCantidad());
-            // Si tienes más campos en DetalleVentaDTO, agrégalos aquí
-            return d;
-        }).collect(Collectors.toList());
+        List<DetalleVenta> detalles = new ArrayList<>();
+        if (ventaRequest.getDetalles() != null) {
+            for (DetalleVentaDTO d : ventaRequest.getDetalles()) {
+                DetalleVenta detalle = new DetalleVenta();
+                detalle.setIdProducto(d.getIdProducto());
+                detalle.setCantidad(d.getCantidad());
+                detalles.add(detalle);
+            }
+        }
 
-        Venta v = ventaService.registrarVenta(venta, detalles);
-        return ResponseEntity.ok(v);
+        Venta ventaRegistrada = ventaService.registrarVenta(venta, detalles);
+        return ResponseEntity.ok(ventaRegistrada);
     }
 
     @GetMapping
