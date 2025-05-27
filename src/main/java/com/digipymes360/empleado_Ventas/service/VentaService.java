@@ -2,6 +2,7 @@ package com.digipymes360.empleado_Ventas.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,8 +44,8 @@ public class VentaService {
         }
         Factura factura = new Factura();
         factura.setVenta(v);
+        factura.setFechaEmision(LocalDateTime.now()); 
         facturaRepository.save(factura);
-        // Asociar la factura a la venta
         v.setFactura(factura);
         return v;
     }
