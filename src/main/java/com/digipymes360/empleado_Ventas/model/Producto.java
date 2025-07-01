@@ -1,25 +1,29 @@
 package com.digipymes360.empleado_Ventas.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.Data;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
+@Table(name = "PRODUCTO")
 @Data
-// @Table(name = "producto")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Producto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "producto_seq")
-    @SequenceGenerator(name = "producto_seq", sequenceName = "PRODUCTO_SEQ", allocationSize = 1)
-    
-    private Long idProducto;
-    private Long idNegocio;
-    private String nombre;
-    private String descripcion; 
-    private Double precio;
-    private Integer stock;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_PRODUCTO")
+    private Long idProducto;
+
+    @Column(name = "NOMBRE", nullable = false)
+    private String nombre;
+
+    @Column(name = "DESCRIPCION")
+    private String descripcion;
+
+    @Column(name = "PRECIO", nullable = false)
+    private Float precio;
+
+    @Column(name = "STOCK", nullable = false)
+    private Long stock;
 }

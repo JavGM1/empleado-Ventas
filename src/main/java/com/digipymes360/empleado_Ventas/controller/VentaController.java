@@ -3,12 +3,12 @@ package com.digipymes360.empleado_Ventas.controller;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.digipymes360.empleado_Ventas.DTO.DetalleVentaDTO;
+import com.digipymes360.empleado_Ventas.DTO.VentaConDetallesDTO;
 import com.digipymes360.empleado_Ventas.DTO.VentaRequestDTO;
 import com.digipymes360.empleado_Ventas.model.DetalleVenta;
 import com.digipymes360.empleado_Ventas.model.Venta;
@@ -67,5 +67,11 @@ private final VentaService ventaService;
             .orElse(ResponseEntity.notFound().build());
 
     }
+    @GetMapping("/detalles/{id}")
+    public ResponseEntity<VentaConDetallesDTO> obtenerVentaConDetalles(@PathVariable Long id) {
+    return ventaService.obtenerVentaConDetalles(id)
+        .map(ResponseEntity::ok)
+        .orElse(ResponseEntity.notFound().build());
+}
 
 }
