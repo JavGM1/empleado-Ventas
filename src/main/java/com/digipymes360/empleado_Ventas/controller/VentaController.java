@@ -14,6 +14,7 @@ import com.digipymes360.empleado_Ventas.model.DetalleVenta;
 import com.digipymes360.empleado_Ventas.model.Venta;
 import com.digipymes360.empleado_Ventas.service.VentaService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.*;
 
 
@@ -24,7 +25,8 @@ import lombok.*;
 public class VentaController {
 
 private final VentaService ventaService;
-
+    
+    @Operation(summary = "Registrar una nueva venta")
     @PostMapping
     public ResponseEntity<Venta> crearVenta(@RequestBody VentaRequestDTO ventaRequest) {
     Venta venta = new Venta();
@@ -49,17 +51,20 @@ private final VentaService ventaService;
         return ResponseEntity.ok(ventaRegistrada);
     }
 
+    @Operation(summary = "Listar todas las ventas")
     @GetMapping
     public List<Venta> listarVentas() {
         return ventaService.listarVentas();
     }
 
+    @Operation(summary = "Eliminar una venta por ID")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarVenta(@PathVariable Long id) {
         ventaService.eliminarVenta(id);
         return ResponseEntity.ok("Venta eliminada exitosamente");
     }
 
+    @Operation(summary = "Obtener venta por ID")
     @GetMapping("/{id}")
     public ResponseEntity<Venta> obtenerVenta(@PathVariable Long id) {
     return ventaService.obtenerPorId(id)
@@ -67,6 +72,8 @@ private final VentaService ventaService;
             .orElse(ResponseEntity.notFound().build());
 
     }
+
+    @Operation(summary = "Obtener venta con detalles por ID")
     @GetMapping("/detalles/{id}")
     public ResponseEntity<VentaConDetallesDTO> obtenerVentaConDetalles(@PathVariable Long id) {
     return ventaService.obtenerVentaConDetalles(id)
